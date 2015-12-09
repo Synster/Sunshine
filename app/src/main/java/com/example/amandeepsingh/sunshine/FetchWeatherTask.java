@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app;
+package com.example.amandeepsingh.sunshine;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,7 +25,8 @@ import android.text.format.Time;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
-import com.example.android.sunshine.app.data.WeatherContract.WeatherEntry;
+import com.example.amandeepsingh.sunshine.data.WeatherContract;
+import com.example.amandeepsingh.sunshine.data.WeatherContract.WeatherEntry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -123,11 +124,11 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         for ( int i = 0; i < cvv.size(); i++ ) {
             ContentValues weatherValues = cvv.elementAt(i);
             String highAndLow = formatHighLows(
-                    weatherValues.getAsDouble(WeatherEntry.COLUMN_MAX_TEMP),
-                    weatherValues.getAsDouble(WeatherEntry.COLUMN_MIN_TEMP));
+                    weatherValues.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP),
+                    weatherValues.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
             resultStrs[i] = getReadableDateString(
-                    weatherValues.getAsLong(WeatherEntry.COLUMN_DATE)) +
-                    " - " + weatherValues.getAsString(WeatherEntry.COLUMN_SHORT_DESC) +
+                    weatherValues.getAsLong(WeatherContract.WeatherEntry.COLUMN_DATE)) +
+                    " - " + weatherValues.getAsString(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC) +
                     " - " + highAndLow;
         }
         return resultStrs;
@@ -330,12 +331,14 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
             final String FORMAT_PARAM = "mode";
             final String UNITS_PARAM = "units";
             final String DAYS_PARAM = "cnt";
+            final String APPID_Param="APPID";
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, params[0])
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                    .appendQueryParameter(APPID_Param,"d0bafe28be5df7eb6eff3ce694a245b2")
                     .build();
 
             URL url = new URL(builtUri.toString());

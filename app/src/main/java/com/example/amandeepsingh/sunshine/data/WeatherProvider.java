@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.amandeepsingh.sunshine.data
+package com.example.amandeepsingh.sunshine.data;
 
 import android.annotation.TargetApi;
 import android.content.ContentProvider;
