@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void OpenPrferredLocationOnMap() {
 
         SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
